@@ -4,6 +4,104 @@ import java.util.Scanner;
 
 public class calculator {
 
+    public static void inverse(Scanner scanner){
+    int col;
+    int row;
+
+    System.out.println("Columns of matrix:"); 
+    col = scanner.nextInt();
+    
+    System.out.println("Rows of matrix");
+    row = scanner.nextInt();
+
+    double[][] inv = new double[col][row];
+    popMatrix(inv, col, row, scanner);
+
+    double determinant = calcDeterimant(inv);
+    if(determinant == 0){
+        //WRITE ERROR HERE FOR IF DETERMINANT IS NON_INVERTABLE
+        System.out.println("ERROR: input matrix is not invertable.");
+    }else{
+    double inverse[][] = calcInverse(inv, determinant);
+    System.out.println("Matrix:");
+    
+        for (int i = 0; i < inverse.length; i++) {
+            for (int j = 0; j < inverse.length; j++) {
+                System.out.print(inverse[i][j] + " ");
+            }
+            System.out.println();
+
+
+          } 
+    }
+}
+
+    private static double[][] calcInverse(double[][] matrix, double determinant){
+        double [][]minors = matrixOfMinors(matrix);
+        double [][]cofactors = matrixOfCofactors(minors);
+        double [][]adjugate = transpose(cofactors);
+
+        double [][]inverse = new double[matrix.length][matrix.length];
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
+                inverse[i][j] = adjugate[i][j] / determinant;
+            }
+        }
+
+        return inverse;
+    }
+
+    
+
+    private static double[][] matrixOfMinors(double[][] matrix) {
+        int n = matrix.length;
+        double[][] minors = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                minors[i][j] = calcDeterimant(minor(matrix, i, j));
+            }
+        }
+        return minors;
+    }
+    private static double[][] minor(double[][] matrix, int row, int col) {
+        int n = matrix.length;
+        double[][] minor = new double[n - 1][n - 1];
+        int minorRow = 0, minorCol = 0;
+        for (int i = 0; i < n; i++) {
+            if (i == row) continue;
+            minorCol = 0;
+            for (int j = 0; j < n; j++) {
+                if (j == col) continue;
+                minor[minorRow][minorCol] = matrix[i][j];
+                minorCol++;
+            }
+            minorRow++;
+        }
+        return minor;
+    } 
+    private static double[][] matrixOfCofactors(double[][] matrix) {
+        int n = matrix.length;
+        double[][] cofactors = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cofactors[i][j] = Math.pow(-1, i + j) * matrix[i][j];
+            }
+        }
+        return cofactors;
+    }
+
+    private static double[][] transpose(double[][] matrix) {
+        int n = matrix.length;
+        double[][] transpose = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                transpose[j][i] = matrix[i][j];
+            }
+        }
+        return transpose;
+    }
+    
     public static boolean isFullRank(double[][] matrix) {
         int numRows = matrix.length;
         int numCols = matrix[0].length;
@@ -209,7 +307,7 @@ Scanner scanner = new Scanner(System.in);
 
 int input;
 
-System.out.println("What type of calculation would you like to execute?\n1. Multiply Matrices\n2. Calculate Determinant of Matrix");
+System.out.println("What type of calculation would you like to execute?\n1. Multiply Matrices\n2. Calculate Determinant of Matrix\n3. Calculate Inverse of Matrix");
 input = scanner.nextInt();
 
 switch(input){
@@ -219,7 +317,10 @@ switch(input){
 
     case 2:
         determinant(scanner);
-        
+        break;
+    
+    case 3:
+        inverse(scanner);
         break;
 
     default:
