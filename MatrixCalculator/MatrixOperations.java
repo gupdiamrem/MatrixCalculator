@@ -170,7 +170,21 @@ protected static void popMatrix(double[][]matrix, int matCol, int matRow, Scanne
         return true; 
     }
 
+protected static double[][] matrixInput(Scanner scanner){
+    int col;
+    int row;
 
+    System.out.println("Columns of matrix:"); 
+    col = scanner.nextInt();
+    
+    System.out.println("Rows of matrix");
+    row = scanner.nextInt();
 
+    double[][] matrix = new double[col][row];
+    MatrixOperations.popMatrix(matrix, col, row, scanner);
+
+    return matrix;
+}
+ 
 }
 

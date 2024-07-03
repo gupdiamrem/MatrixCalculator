@@ -16,6 +16,7 @@ public class Inverse {
 
     double[][] inv = new double[col][row];
     MatrixOperations.popMatrix(inv, col, row, scanner);
+    
 
     double determinant = Determinant.calcDeterimant(inv);
     if(determinant == 0){

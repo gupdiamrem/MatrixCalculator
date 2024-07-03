@@ -12,7 +12,7 @@ Scanner scanner = new Scanner(System.in);
 
 int input;
 
-System.out.println("What type of calculation would you like to execute?\n1. Multiply Matrices\n2. Calculate Determinant of Matrix\n3. Calculate Inverse of Matrix");
+System.out.println("What type of calculation would you like to execute?\n1. Multiply Matrices\n2. Calculate Determinant of Matrix\n3. Calculate Inverse of Matrix\n4. Transpose Matrix");
 input = scanner.nextInt();
 
 switch(input){
@@ -28,6 +28,8 @@ switch(input){
         Inverse.inverse(scanner);
         break;
 
+    case 4:
+        MatrixOperations.transpose(MatrixOperations.matrixInput(scanner));
     default:
         System.out.println("Error: Invalid Input");
 }
