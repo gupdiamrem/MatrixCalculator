@@ -1,9 +1,9 @@
-package MatrixCalculator;
+package matrixCalculatorClasses;
 import java.util.Scanner;
 
     
 
-public class calculator {
+public class Calculator {
 
 
 public static void main(String[] args)
@@ -12,8 +12,7 @@ Scanner scanner = new Scanner(System.in);
 
 int input;
 
-System.out.println("What type of calculation would you like to execute?\n1. Multiply Matrices\n2. Calculate Determinant of Matrix\n3. Calculate Inverse of Matrix");
-input = scanner.nextInt();
+System.out.println("What type of calculation would you like to execute?\n1. Multiply Matrices\n2. Calculate Determinant of Matrix\n3. Calculate Inverse of Matrix\n4. Transpose Matrix");input = scanner.nextInt();
 
 switch(input){
     case 1:
@@ -26,6 +25,11 @@ switch(input){
     
     case 3:
         Inverse.inverse(scanner);
+        break;
+
+    case 4:
+        double[][] matrix = MatrixOperations.transpose(MatrixOperations.matrixInput(scanner));
+        MatrixOperations.transposePrint(matrix);
         break;
 
     default:

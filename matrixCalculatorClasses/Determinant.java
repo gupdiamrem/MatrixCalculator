@@ -1,4 +1,5 @@
-package MatrixCalculator;
+package matrixCalculatorClasses;
+
 import java.util.Scanner;
 
 public class Determinant {
