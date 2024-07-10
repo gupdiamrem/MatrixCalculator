@@ -1,4 +1,5 @@
-package MatrixCalculator;
+package matrixCalculatorClasses;
+
 import java.util.Scanner;
 
 public class MatrixOperations {
@@ -126,10 +127,14 @@ protected static void popMatrix(double[][]matrix, int matCol, int matRow, Scanne
     }
 
     protected static double[][] transpose(double[][] matrix) {
-        int n = matrix.length;
-        double[][] transpose = new double[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+         // Swapping dimensions for transpose
+        double[][] transpose = new double[cols][rows];
+    
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                 // Swap indices for transposition
                 transpose[j][i] = matrix[i][j];
             }
         }
@@ -183,8 +188,27 @@ protected static double[][] matrixInput(Scanner scanner){
     double[][] matrix = new double[col][row];
     MatrixOperations.popMatrix(matrix, col, row, scanner);
 
-    return matrix;
-}
- 
+    System.out.println("Matrix:");
+    for (int i = 0; i < matrix.length; i++) {
+        for (int j = 0; j < matrix[0].length; j++) {
+            System.out.print(matrix[i][j] + " ");
+        }
+        System.out.println();
 }
 
+    return matrix;
+}
+
+protected static void transposePrint(double[][] matrix){
+
+
+ System.out.println("Matrix:");
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[0].length; j++) {
+                    System.out.print(matrix[i][j] + " ");
+                }
+                System.out.println();
+}
+}
+
+}
